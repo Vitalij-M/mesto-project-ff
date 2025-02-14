@@ -17,18 +17,13 @@ export const closeModal = (modal) => {
   modal.classList.remove("popup_is-animated");
 };
 
-export const popupCloseButton = () => {
-  const popupCloseButtons = document.querySelectorAll(".popup__close");
-  popupCloseButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      closeModal(e.target.closest(".popup"));
-    });
+export const initPopupCloseListeners = (popup) => {
+  popup.addEventListener("mousedown", (e) => {
+    if (e.target === popup) {
+      closeModal(popup);
+    }
   });
-  document.querySelectorAll(".popup").forEach((popup) => {
-    popup.addEventListener("mousedown", (e) => {
-      if (e.target === popup) {
-        closeModal(popup);
-      }
-    });
+  popup.querySelector(".popup__close").addEventListener("click", () => {
+    closeModal(popup);
   });
 };
